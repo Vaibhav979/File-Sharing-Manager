@@ -61,7 +61,7 @@ public class FileServiceImpl implements FileService {
     public ResponseEntity<?> deleteFile(int id) {
         Optional<FileEntity> entity = fileRepository.findById(id);
         if (entity.isPresent()) {
-            fileRepository.delete(entity.get());
+            file
             return ResponseEntity.ok().body(convertToModel(entity.get()));
         } else {
             throw new FileNotFoundException("File not found");
