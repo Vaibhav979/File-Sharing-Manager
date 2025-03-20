@@ -17,7 +17,6 @@ import com.example.FileSharingManager.entity.FileEntity;
 import com.example.FileSharingManager.exception.FileNotFoundException;
 import com.example.FileSharingManager.model.FileModel;
 import com.example.FileSharingManager.repository.FileRepository;
-import org.springframework.http.HttpHeaders;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -72,16 +71,12 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public ResponseEntity<?> getFile(int id) {
-        Optional<FileEntity> entity = fileRepository.findById(id);
-        if (entity.isPresent()) {
+        Optional <FileEntity> entity = fileRepository.findById(id);
+        if(entity.isPresent()){
             FileEntity fileEntity = entity.get();
             FileModel fileModel = new FileModel();
             BeanUtils.copyProperties(fileEntity, fileModel);
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileModel.getFilename() + "\"")
-                    .body(fileModel.getFileData());
-        } else {
-            throw new FileNotFoundException("file not found");
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename")
         }
     }
 

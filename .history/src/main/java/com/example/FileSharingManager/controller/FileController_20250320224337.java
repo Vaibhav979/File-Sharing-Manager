@@ -43,7 +43,7 @@ public class FileController {
     public String shareFile(@PathVariable int id, Model model) {
         ResponseEntity<?> fileModel = fileService.shareFile(id);
         if (fileModel.hasBody()) {
-            String currentUrl = ServletUriComponentsBuilder.fromCurrentRequest().toUriString(); // url
+            String currentUrl = ServletUriComponentsBuilder.fromCurrentRequest().toUString(); // url
             model.addAttribute("shareUrl", currentUrl);
             model.addAttribute("file", fileModel.getBody());
             return "share-file";

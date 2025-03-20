@@ -78,10 +78,10 @@ public class FileServiceImpl implements FileService {
             FileModel fileModel = new FileModel();
             BeanUtils.copyProperties(fileEntity, fileModel);
             return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileModel.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename#\"" + fileModel.getFilename() + "\"")
                     .body(fileModel.getFileData());
-        } else {
-            throw new FileNotFoundException("file not found");
+        }else{
+            
         }
     }
 

@@ -43,7 +43,7 @@ public class FileController {
     public String shareFile(@PathVariable int id, Model model) {
         ResponseEntity<?> fileModel = fileService.shareFile(id);
         if (fileModel.hasBody()) {
-            String currentUrl = ServletUriComponentsBuilder.fromCurrentRequest().toUriString(); // url
+            String currentUrl = ServletUriComponentsBuilder.fromCurrentRequest().toString(); // url
             model.addAttribute("shareUrl", currentUrl);
             model.addAttribute("file", fileModel.getBody());
             return "share-file";
@@ -63,7 +63,7 @@ public class FileController {
     }
 
     @GetMapping("/download/{id}")
-    public ResponseEntity<?> downloadFile(@PathVariable("id") int id) {
+    public ResponseEntity<?> downloadFile(@PathVariable("id") int id){
         return fileService.getFile(id);
     }
 
