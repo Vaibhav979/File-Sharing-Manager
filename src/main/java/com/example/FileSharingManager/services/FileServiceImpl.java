@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,7 +18,6 @@ import com.example.FileSharingManager.entity.FileEntity;
 import com.example.FileSharingManager.exception.FileNotFoundException;
 import com.example.FileSharingManager.model.FileModel;
 import com.example.FileSharingManager.repository.FileRepository;
-import org.springframework.http.HttpHeaders;
 
 @Service
 public class FileServiceImpl implements FileService {
@@ -83,6 +83,14 @@ public class FileServiceImpl implements FileService {
         } else {
             throw new FileNotFoundException("file not found");
         }
+    }
+
+    @Override
+    @Scheduled(cron = "0 0 0 * * *")
+    public void deleteExpiredFiles() {
+        List<FileEntity> files = fileRepository.findByExpiryTimeBefore(LocalDateTime.now());
+        files.forEach(fileRepository::delete);
+        System.out.println("Files Deleted Successfully" + LocalDateTime.now());
     }
 
 }

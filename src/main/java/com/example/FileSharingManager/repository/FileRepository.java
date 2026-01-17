@@ -9,5 +9,5 @@ import java.time.LocalDateTime;
 
 @Repository
 public interface FileRepository extends JpaRepository<FileEntity, Integer> {
-    // List<FileEntity> findByExpiryDate(LocalDateTime now);
+    List<FileEntity> findByExpiryTimeBefore(LocalDateTime now);
 }

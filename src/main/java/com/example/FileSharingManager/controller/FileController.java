@@ -25,6 +25,11 @@ public class FileController {
     @Autowired
     FileServiceImpl fileService;
 
+    @GetMapping()
+    public String login() {
+        return "home";
+    }
+
     @GetMapping("/home")
     public String index(Model model) {
         model.addAttribute("files", fileService.getAll());

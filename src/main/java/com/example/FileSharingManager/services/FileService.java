@@ -18,4 +18,6 @@ public interface FileService {
     public ResponseEntity<?> deleteFile(int id);
 
     public ResponseEntity<?> getFile(int id);
+
+    public void deleteExpiredFiles();
 }
