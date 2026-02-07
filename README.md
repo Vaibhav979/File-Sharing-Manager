@@ -107,7 +107,7 @@ http://localhost:8080
 - Protected API endpoints
 - Secure file access validation
 - Prevention of unauthorized downloads
-- 
+
 ---
 
 ## 🛠 Background Cleanup System
